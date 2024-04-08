@@ -10,7 +10,7 @@
             "cStandard": "c17",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "linux-gcc-x86",
-            "compilerPath": "/home/abdulhadi5692hdi2/32elf/bin/i386-elf-gcc"
+            "compilerPath": "~/64elf/bin/x86_64-elf-gcc"
         }
     ],
     "version": 4

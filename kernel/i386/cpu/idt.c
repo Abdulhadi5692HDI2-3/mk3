@@ -1,8 +1,11 @@
 #include <i386/cpu/idt.h>
+#include <i386/cpu/pic.h>
+#include <i386/cpu/pit.h>
 #include <other.h>
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
+#include <write.h>
 
 // functions
 extern void* IsrStubTable[];
@@ -38,8 +41,7 @@ static Idtr IDTR;
 
 // Exception Handler
 // shouldnt return
-__attribute__((noreturn))
-void ExceptionHandler(void);
+void ExceptionHandler();
 void ExceptionHandler() {
     KernelERROR("CPU Exception!");
     __asm__ volatile ("cli; hlt");
@@ -50,6 +52,8 @@ void InitIDT() {
     IDTR.base = (uintptr_t)&IDT;
     IDTR.limit = (uint16_t)sizeof(IdtEntry) * 256 - 1;
     
+    // remap the pic
+    RemapPIC(0x20, 0x28);
     for (uint8_t vector = 0; vector < 32; vector++) {
         IdtSetDescriptor(vector, IsrStubTable[vector], 0x8E);
         vectors[vector] = true;
@@ -57,6 +61,7 @@ void InitIDT() {
 
     __asm__ volatile ("lidt %0" : : "m"(IDTR)); // load the new IDT
     __asm__ volatile ("sti"); // set the interrupt flag
+
 }
 
 void IdtSetDescriptor(uint8_t Vector, void* ISR, uint8_t Flags) {

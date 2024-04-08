@@ -2,5 +2,6 @@
     "files.associations": {
         "stdint.h": "c"
     },
-    "C_Cpp.errorSquiggles": "disabled" // someone tell me how to fix vscode keep giving errors.
+    "C_Cpp.errorSquiggles": "disabled",
+    "C_Cpp.default.compilerPath": "/home/abdulhadi5692hdi2/32elf/bin/i386-elf-gcc" // someone tell me how to fix vscode keep giving errors.
 }
