@@ -20,7 +20,8 @@ all: $(KERNEL_OUT)
 $(KERNEL_OUT): $(OBJ)
 	$(CC) $(CFLAGS) -c boot.S -o boot.S.o
 	nasm i386/cpu/setgdt.asm -f elf32 -o i386/cpu/setgdt.asm.o
-	$(CC) -T ../linker.ld -o ../$@ -ffreestanding -O2 -nostdlib boot.S.o i386/cpu/setgdt.asm.o $^ -lgcc
+	nasm i386/cpu/isr.asm -f elf32 -o i386/cpu/isr.asm.o
+	$(CC) -T ../linker.ld -o ../$@ -ffreestanding -O2 -nostdlib boot.S.o i386/cpu/setgdt.asm.o i386/cpu/isr.asm.o $^ -lgcc
 
 %.c.o: %.c
 	$(CC) $(CFLAGS) -I . -c $^ -o $@
@@ -29,3 +30,4 @@ $(KERNEL_OUT): $(OBJ)
 clean:
 	rm -rf $(OBJ)
 	rm -rf boot.S.o
+	rm -rf i386/cpu/*.asm.o

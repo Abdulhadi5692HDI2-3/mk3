@@ -3,6 +3,8 @@
 #include <write.h>
 #include <vga/text.h>
 #include <i386/cpu/gdt.h>
+#include <i386/cpu/idt.h>
+#include <other.h>
 
 #if defined(__linux__)
 	#error "This code must be compiled with a cross-compiler"
@@ -14,16 +16,11 @@
 	#error "This code must be compiled with a cross compiler producing an ELF32 file"
 #endif
 
-void KernelOK(const char* message) {
-	printf("[");
-	TerminalSetColor(0x0A);
-	printf("OK");
-	TerminalSetColor(0x07);
-	printf("] %s\n", message);
-}
 void kernel_main() {
 	TerminalInitalize();
 	KernelOK("Initalized the Terminal");
 	InitGDT();
 	KernelOK("Initalized the GDT!");
+	InitIDT();
+	KernelOK("Initalized the IDT and interrupts should be working.");
 }
