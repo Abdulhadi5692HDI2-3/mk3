@@ -4,7 +4,6 @@
 #include <vga/text.h>
 #include <i386/cpu/gdt.h>
 #include <i386/cpu/idt.h>
-#include <i386/cpu/pit.h>
 #include <other.h>
 #include <basicio.h>
 
