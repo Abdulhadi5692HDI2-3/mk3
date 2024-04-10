@@ -1,16 +1,16 @@
 {
     "configurations": [
         {
-            "name": "32elf",
+            "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
-                "/home/abdulhadi5692hdi2/32elf/include"
+                "${workspaceFolder}/gnu-efi/inc/**"
             ],
             "defines": [],
             "cStandard": "c17",
             "cppStandard": "gnu++17",
-            "intelliSenseMode": "linux-gcc-x86",
-            "compilerPath": "~/64elf/bin/x86_64-elf-gcc"
+            "intelliSenseMode": "linux-gcc-x64",
+            "configurationProvider": "ms-vscode.makefile-tools",
+            "compilerPath": "/usr/bin/gcc"
         }
     ],
     "version": 4
